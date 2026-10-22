@@ -527,6 +527,7 @@
         padding-left: 13px;
         padding-right: 13px;
     }
+
     .dashboard {
         padding-right: 12px;
         padding-left: 12px;
@@ -608,4 +609,60 @@
     .progress-value {
         transition: none;
     }
+}
+
+/* Clickable dashboard cards */
+.kitchen-card,
+.nutrition-card,
+.health-card {
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.nutrition-card {
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(21, 115, 75, 0.12);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nutrition-card:hover,
+.health-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(21, 115, 75, 0.3);
+    box-shadow: 0 7px 18px rgba(21, 65, 43, 0.09);
+}
+
+.nutrition-card:active,
+.health-card:active {
+    transform: scale(0.99);
+}
+
+.nutrition-card:focus-visible,
+.health-card:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
+}
+
+
+/* Dashboard cards are links to their destination pages */
+.dashboard-card-link {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nutrition-card.dashboard-card-link {
+    display: block;
+}
+
+.dashboard-card-link:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
 }

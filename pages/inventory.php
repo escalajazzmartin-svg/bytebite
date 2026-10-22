@@ -107,6 +107,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: inventory.php?added=1');
                     exit;
                 }
+            } elseif ($action === 'edit') {
+                $ingredientId = filter_var($_POST['ingredient_id'] ?? null, FILTER_VALIDATE_INT);
+                $name = trim($_POST['name'] ?? '');
+                $quantity = $_POST['quantity'] ?? '';
+                $unit = trim($_POST['unit'] ?? '');
+                $newCategory = trim($_POST['category'] ?? '');
+                $expiryDate = trim($_POST['expiry_date'] ?? '');
+                $allowedUnits = ['g', 'kg', 'ml', 'L', 'pcs', 'cans', 'packs'];
+
+                if (!$ingredientId || $ingredientId < 1) {
+                    $error = 'Invalid ingredient.';
+                } elseif ($name === '' || mb_strlen($name) > 150) {
+                    $error = 'Enter an ingredient name with up to 150 characters.';
+                } elseif (!is_numeric($quantity) || (float)$quantity <= 0 || (float)$quantity > 99999999) {
+                    $error = 'Enter a valid quantity greater than zero.';
+                } elseif (!in_array($unit, $allowedUnits, true)) {
+                    $error = 'Please select a valid unit.';
+                } elseif (!in_array($newCategory, $categories, true)) {
+                    $error = 'Please select a valid category.';
+                } elseif ($expiryDate !== '' && (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $expiryDate) || !checkdate((int)substr($expiryDate, 5, 2), (int)substr($expiryDate, 8, 2), (int)substr($expiryDate, 0, 4)))) {
+                    $error = 'Please enter a valid expiration date.';
+                } else {
+                    $stmt = $pdo->prepare(
+                        'UPDATE ingredients
+                         SET name = ?, quantity = ?, unit = ?, category = ?, expiry_date = ?
+                         WHERE id = ? AND user_id = ?'
+                    );
+                    $stmt->execute([$name, (float)$quantity, $unit, $newCategory, $expiryDate !== '' ? $expiryDate : null, $ingredientId, $userId]);
+                    header('Location: inventory.php?updated=1');
+                    exit;
+                }
             } elseif ($action === 'delete') {
                 $ingredientId = filter_var(
                     $_POST['ingredient_id'] ?? null,
@@ -270,6 +301,10 @@ function inventoryFilterUrl(string $category, string $search): string
             <?php elseif (isset($_GET['deleted'])): ?>
                 <div class="inventory-message success" role="status">
                     Ingredient deleted successfully.
+                </div>
+            <?php elseif (isset($_GET['updated'])): ?>
+                <div class="inventory-message success" role="status">
+                    Ingredient updated successfully.
                 </div>
             <?php endif; ?>
 
@@ -453,36 +488,68 @@ function inventoryFilterUrl(string $category, string $search): string
                                     <?= inventoryEscape($statusLabel) ?>
                                 </span>
 
-                                <details class="ingredient-actions">
-                                    <summary class="ingredient-menu"
-                                        aria-label="Options for <?= inventoryEscape($ingredient['name']) ?>">
-                                        <i class="fa-solid fa-ellipsis"
-                                            aria-hidden="true"></i>
-                                    </summary>
-
-                                    <form action="inventory.php"
-                                        method="post"
+                                <div class="ingredient-actions">
+                                    <button type="button" class="ingredient-action edit-action"
+                                        aria-label="Edit <?= inventoryEscape($ingredient['name']) ?>"
+                                        title="Edit ingredient"
+                                        onclick="toggleIngredientEdit(<?= (int)$ingredient['id'] ?>)">
+                                        <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                                    </button>
+                                    <form class="delete-ingredient-form" action="inventory.php" method="post"
                                         onsubmit="return confirm('Delete this ingredient?');">
-
-                                        <input type="hidden"
-                                            name="action"
-                                            value="delete">
-
-                                        <input type="hidden"
-                                            name="csrf_token"
-                                            value="<?= inventoryEscape($csrfToken) ?>">
-
-                                        <input type="hidden"
-                                            name="ingredient_id"
-                                            value="<?= (int) $ingredient['id'] ?>">
-
-                                        <button type="submit" class="delete-ingredient">
-                                            <i class="fa-solid fa-trash"
-                                                aria-hidden="true"></i>
-                                            Delete
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="csrf_token" value="<?= inventoryEscape($csrfToken) ?>">
+                                        <input type="hidden" name="ingredient_id" value="<?= (int)$ingredient['id'] ?>">
+                                        <button type="submit" class="ingredient-action delete-action"
+                                            aria-label="Delete <?= inventoryEscape($ingredient['name']) ?>"
+                                            title="Delete ingredient">
+                                            <i class="fa-solid fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                </details>
+                                </div>
+                                <div class="ingredient-edit-panel" id="edit-ingredient-<?= (int)$ingredient['id'] ?>" hidden>
+                                    <form action="inventory.php" method="post" class="ingredient-edit-form">
+                                        <input type="hidden" name="action" value="edit">
+                                        <input type="hidden" name="csrf_token" value="<?= inventoryEscape($csrfToken) ?>">
+                                        <input type="hidden" name="ingredient_id" value="<?= (int)$ingredient['id'] ?>">
+                                        <div class="form-group">
+                                            <label for="edit-name-<?= (int)$ingredient['id'] ?>">Ingredient name</label>
+                                            <input id="edit-name-<?= (int)$ingredient['id'] ?>" name="name" type="text" maxlength="150" required value="<?= inventoryEscape($ingredient['name']) ?>">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="edit-quantity-<?= (int)$ingredient['id'] ?>">Quantity</label>
+                                                <input id="edit-quantity-<?= (int)$ingredient['id'] ?>" name="quantity" type="number" min="0.01" max="99999999" step="0.01" required value="<?= inventoryEscape($ingredient['quantity']) ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-unit-<?= (int)$ingredient['id'] ?>">Unit</label>
+                                                <select id="edit-unit-<?= (int)$ingredient['id'] ?>" name="unit" required>
+                                                    <?php foreach (['g' => 'Grams (g)', 'kg' => 'Kilograms (kg)', 'ml' => 'Milliliters (ml)', 'L' => 'Liters (L)', 'pcs' => 'Pieces', 'cans' => 'Cans', 'packs' => 'Packs'] as $unitValue => $unitLabel): ?>
+                                                        <option value="<?= inventoryEscape($unitValue) ?>" <?= $ingredient['unit'] === $unitValue ? 'selected' : '' ?>><?= inventoryEscape($unitLabel) ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="edit-category-<?= (int)$ingredient['id'] ?>">Category</label>
+                                                <select id="edit-category-<?= (int)$ingredient['id'] ?>" name="category" required>
+                                                    <?php foreach ($categories as $itemCategory): ?>
+                                                        <option value="<?= inventoryEscape($itemCategory) ?>" <?= $ingredient['category'] === $itemCategory ? 'selected' : '' ?>><?= inventoryEscape($itemCategory) ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-expiry-<?= (int)$ingredient['id'] ?>">Expiration date</label>
+                                                <input id="edit-expiry-<?= (int)$ingredient['id'] ?>" name="expiry_date" type="date" value="<?= inventoryEscape($ingredient['expiry_date'] ?? '') ?>">
+                                            </div>
+                                        </div>
+                                        <div class="ingredient-edit-buttons">
+                                            <button type="button" class="edit-cancel-button" onclick="toggleIngredientEdit(<?= (int)$ingredient['id'] ?>)">Cancel</button>
+                                            <button type="submit" class="edit-save-button"><i class="fa-solid fa-check" aria-hidden="true"></i> Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </article>
                         <?php endforeach; ?>
 
@@ -496,6 +563,30 @@ function inventoryFilterUrl(string $category, string $search): string
 
     <?php require_once __DIR__ . '/../includes/navigation.php'; ?>
 
+    <script>
+        function toggleIngredientEdit(ingredientId) {
+            const panel = document.getElementById('edit-ingredient-' + ingredientId);
+            if (!panel) return;
+
+            const willOpen = panel.hidden;
+
+            // Close other open editors so the inventory remains tidy.
+            document.querySelectorAll('.ingredient-edit-panel').forEach((item) => {
+                item.hidden = true;
+            });
+
+            panel.hidden = !willOpen;
+
+            if (willOpen) {
+                const firstInput = panel.querySelector('input[name="name"]');
+                if (firstInput) firstInput.focus();
+                panel.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -186,25 +186,18 @@ function h($value): string
 
     <main class="page active-page" id="homePage">
         <div class="dashboard">
-
             <section class="greeting">
-                <span class="eyebrow">WELCOME BACK, <?= h(strtoupper($firstName)) ?></span>
-                <h2>
-                    <?= h($greeting) ?>
-                    <i class="fa-solid fa-hand-wave" aria-hidden="true"></i>
-                </h2>
+                <span class="eyebrow">HELLO, <?= h(strtoupper($firstName)) ?></span>
                 <p>What are we cooking today?</p>
             </section>
 
             <section class="section">
                 <div class="section-title">
                     <h3>Your Kitchen</h3>
-                    <button type="button" data-page="inventory">View all</button>
                 </div>
 
                 <div class="kitchen-grid">
-                    <button class="kitchen-card inventory"
-                        type="button" data-page="inventory">
+                    <a class="kitchen-card inventory dashboard-card-link" href="inventory.php" aria-label="View ingredients in your inventory">
                         <div class="feature-icon" aria-hidden="true">
                             <i class="fa-solid fa-carrot"></i>
                         </div>
@@ -215,10 +208,9 @@ function h($value): string
                             </div>
                             <p>Available in your kitchen</p>
                         </div>
-                    </button>
+                    </a>
 
-                    <button class="kitchen-card expiring"
-                        type="button" data-page="inventory">
+                    <a class="kitchen-card expiring dashboard-card-link" href="inventory.php" aria-label="View ingredients expiring soon">
                         <div class="feature-icon" aria-hidden="true">
                             <i class="fa-solid fa-clock"></i>
                         </div>
@@ -229,17 +221,16 @@ function h($value): string
                             </div>
                             <p>Expiring within 7 days</p>
                         </div>
-                    </button>
+                    </a>
                 </div>
             </section>
 
             <section class="section">
                 <div class="section-title">
                     <h3>Nutrition Today</h3>
-                    <button type="button" data-page="health">Details</button>
                 </div>
 
-                <div class="nutrition-card">
+                <a class="nutrition-card clickable-card dashboard-card-link" href="health.php" aria-label="View today's nutrition details">
                     <div class="nutrition-header">
                         <div>
                             <span class="eyebrow">DAILY CALORIES</span>
@@ -298,8 +289,8 @@ function h($value): string
                 </div>
             </section>
 
-            <button class="health-card"
-                type="button" data-page="health">
+            <a class="health-card dashboard-card-link"
+                href="health.php" aria-label="View your health goal">
                 <div class="health-icon" aria-hidden="true">
                     <i class="fa-solid fa-heart-pulse"></i>
                 </div>
@@ -316,7 +307,7 @@ function h($value): string
                 <span class="health-arrow" aria-hidden="true">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
-            </button>
+            </a>
 
         </div>
     </main>
