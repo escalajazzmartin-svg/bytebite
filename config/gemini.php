@@ -1,13 +1,19 @@
-
 <?php
 
 $localConfig = __DIR__ . '/gemini.local.php';
 
 if (!is_file($localConfig)) {
-    return [
-        'api_key' => getenv('GEMINI_API_KEY') ?: '',
-        'model' => getenv('GEMINI_MODEL') ?: '',
-    ];
+    throw new RuntimeException(
+        'Missing config/gemini.local.php'
+    );
 }
 
-return require $localConfig;
+$config = require $localConfig;
+
+if (empty($config['api_key']) || empty($config['model'])) {
+    throw new RuntimeException(
+        'Gemini API key or model is missing.'
+    );
+}
+
+return $config;
