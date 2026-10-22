@@ -1,0 +1,178 @@
+/* ========================================
+   BYTEBITE — BOTTOM NAVIGATION
+======================================== */
+
+.bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+
+    height: calc(58px + env(safe-area-inset-bottom, 0px));
+    padding: 5px 0 env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    background: var(--charcoal);
+    border-top: var(--dark-border);
+}
+
+.nav-item {
+    position: relative;
+    min-width: 0;
+    height: 100%;
+    padding: 5px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    border: none;
+    background: transparent;
+    color: var(--white-muted);
+
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-item>i {
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    color: inherit;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-item strong {
+    display: block;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.nav-item span {
+    display: block;
+    white-space: nowrap;
+}
+
+.nav-item.active {
+    color: var(--green-secondary);
+}
+
+.nav-item.active>i {
+    color: var(--green-secondary);
+}
+
+.nav-item:hover>i {
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   GENERATE BUTTON
+======================================== */
+
+.ai-nav {
+    position: relative;
+    z-index: 2;
+}
+
+.ai-nav::before {
+    content: "";
+    position: absolute;
+    top: -22px;
+    left: 50%;
+
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+    background: var(--green-primary);
+
+    pointer-events: none;
+    z-index: 0;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.ai-nav>i {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+
+    width: 30px;
+    height: 30px;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--cream);
+    font-size: 23px;
+    line-height: 1;
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+.ai-nav:hover>i {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.ai-nav strong {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: var(--white-muted);
+    font-size: 10px;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.ai-nav.active::before {
+    border-color: var(--green-secondary);
+    background: var(--cream);
+}
+
+.ai-nav.active>i {
+    color: var(--green-primary);
+}
+
+.ai-nav.active strong {
+    color: var(--green-secondary);
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+.nav-item:focus-visible {
+    outline: 2px solid var(--green-secondary);
+    outline-offset: -4px;
+    border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nav-item>i,
+    .ai-nav::before {
+        transition: none;
+    }
+}

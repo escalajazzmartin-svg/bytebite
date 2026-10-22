@@ -1,0 +1,680 @@
+/* HOME PAGE — REQUIRED STYLES */
+
+/* ROOT VARIABLES */
+
+/* ========================================
+   BYTEBITE — WHITE & GREEN THEME
+======================================== */
+
+:root {
+  --charcoal: #174B35;
+  --green-primary: #15734B;
+  --green-secondary: #65AD33;
+  --cream: #FFFFFF;
+
+  --green-light: #EAF5ED;
+  --green-soft: #F4FAF5;
+  --green-border: #D5E8DA;
+
+  --text-1: 28px;
+  --text-2: 17px;
+  --text-3: 13px;
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+
+  --border: 1px solid #D5E8DA;
+  --dark-border: 1px solid #D5E8DA;
+
+  --text-muted: #64786B;
+  --white-muted: #64786B;
+
+  --page-background: #FFFFFF;
+  --card-background: #F4FAF5;
+  --input-background: #F4FAF5;
+}
+
+/* GLOBAL */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--page-background);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding-bottom: calc(58px + env(safe-area-inset-bottom, 0px));
+
+  background: var(--page-background);
+  color: var(--charcoal);
+
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--green-primary);
+  outline-offset: 3px;
+}
+
+.eyebrow {
+  display: block;
+  margin: 0 0 5px;
+
+  color: var(--green-primary);
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* HEADER */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  min-height: calc(48px + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 18px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--charcoal);
+  border-bottom: var(--dark-border);
+}
+
+.brand {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--cream);
+}
+
+.brand>img {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: block;
+  object-fit: contain;
+
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--cream);
+}
+
+.brand>div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand h1 {
+  margin: 0;
+
+  color: var(--cream);
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 750;
+}
+
+.brand h1 span {
+  color: var(--green-secondary);
+}
+
+.brand p {
+  margin: 4px 0 0;
+
+  color: var(--white-muted);
+  font-size: 10px;
+  line-height: 1.2;
+  font-style: italic;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  background: transparent;
+  color: var(--cream);
+  font-size: 18px;
+}
+
+/* PAGE LAYOUT AND GREETING */
+
+.page {
+  display: none;
+}
+
+.page.active-page {
+  display: block;
+}
+
+.dashboard {
+  width: min(100%, 700px);
+  margin: 0 auto;
+  padding: 16px 18px 24px;
+}
+
+.greeting {
+  margin-bottom: 26px;
+}
+
+.greeting h2 {
+  margin: 5px 0 0;
+
+  color: var(--charcoal);
+  font-size: var(--text-1);
+  line-height: 1.15;
+  font-weight: 750;
+}
+
+.greeting>p:last-child {
+  margin: 6px 0 0;
+
+  color: var(--text-muted);
+  font-size: var(--text-3);
+  line-height: 1.45;
+}
+
+/* SECTION HEADINGS */
+
+.section {
+  margin-bottom: 26px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.section-title h3 {
+  margin: 0;
+
+  color: var(--charcoal);
+  font-size: var(--text-2);
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.section-title button {
+  padding: 4px;
+
+  background: transparent;
+  color: var(--green-primary);
+
+  font-size: var(--text-3);
+  font-weight: 650;
+}
+
+/* KITCHEN CARDS */
+
+.kitchen-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kitchen-card {
+  min-width: 0;
+  min-height: 96px;
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  text-align: left;
+
+  border: var(--dark-border);
+  border-radius: var(--radius-md);
+
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.kitchen-card .feature-icon {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+  background: var(--cream);
+}
+
+.kitchen-card .feature-icon img {
+  width: 30px;
+  height: 30px;
+
+  display: block;
+  object-fit: contain;
+}
+
+.kitchen-card-content {
+  min-width: 0;
+  min-height: 54px;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kitchen-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.kitchen-card h4 {
+  width: 35px;
+  min-width: 10px;
+  margin: 0;
+
+  color: var(--cream);
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 750;
+  text-align: center;
+}
+
+.kitchen-card strong {
+  display: block;
+
+  color: var(--cream);
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.kitchen-card p {
+  margin: 5px 0 0;
+
+  color: var(--white-muted);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+/* NUTRITION CARD */
+
+.nutrition-card {
+  padding: 18px;
+
+  border: var(--dark-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.nutrition-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.nutrition-header h2 {
+  margin: 5px 0 0;
+
+  color: var(--cream);
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.nutrition-header h2 small {
+  color: var(--white-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.calorie-icon,
+.health-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+  background: var(--cream);
+}
+
+.calorie-icon img,
+.health-icon img {
+  width: 24px;
+  height: 24px;
+
+  display: block;
+  object-fit: contain;
+}
+
+/* CALORIE PROGRESS */
+
+.progress {
+  height: 7px;
+  margin: 17px 0;
+
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--cream);
+}
+
+.progress-value {
+  height: 100%;
+
+  border-radius: inherit;
+  background: var(--green-secondary);
+}
+
+/* MACRONUTRIENTS */
+
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.macro {
+  min-width: 0;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  color: var(--charcoal);
+}
+
+.macro b {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+
+  display: grid;
+  place-items: center;
+}
+
+.macro b img {
+  width: 20px;
+  height: 20px;
+
+  display: block;
+  object-fit: contain;
+}
+
+.macro strong {
+  display: block;
+
+  color: var(--charcoal);
+  font-size: 13px;
+}
+
+.macro span {
+  display: block;
+  margin-top: 1px;
+
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* HEALTH GOAL CARD */
+
+.health-card {
+  width: 100%;
+  margin: 0 0 26px;
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  text-align: left;
+
+  border: var(--dark-border);
+  border-radius: var(--radius-md);
+
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.health-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.health-info h3 {
+  margin: 4px 0 2px;
+
+  color: var(--cream);
+  font-size: var(--text-2);
+}
+
+.health-info p {
+  margin: 0;
+
+  color: var(--white-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.health-card>span:last-child {
+  color: var(--cream);
+  font-size: 20px;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+
+  height: calc(58px + env(safe-area-inset-bottom, 0px));
+  padding: 5px 0 env(safe-area-inset-bottom, 0px);
+
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  background: var(--charcoal);
+  border-top: var(--dark-border);
+}
+
+.nav-item {
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  padding: 5px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+
+  background: transparent;
+  color: var(--white-muted);
+
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-item img {
+  width: 22px;
+  height: 22px;
+
+  display: block;
+  object-fit: contain;
+
+  filter: brightness(0) invert(1);
+}
+
+.nav-item.active {
+  color: var(--green-secondary);
+}
+
+.nav-item.active img {
+  filter: invert(34%) sepia(25%) saturate(1420%) hue-rotate(103deg) brightness(91%) contrast(91%);
+}
+
+/* GENERATE NAVIGATION BUTTON */
+
+.ai-nav {
+  position: relative;
+  z-index: 2;
+}
+
+.ai-nav::before {
+  content: "";
+
+  position: absolute;
+  top: -22px;
+  left: 50%;
+
+  width: 48px;
+  height: 48px;
+
+  transform: translateX(-50%);
+
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+
+  background: var(--green-primary);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ai-nav img {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  transform: translateX(-50%);
+
+  filter: brightness(0) invert(1);
+  z-index: 1;
+}
+
+.ai-nav.active::before {
+  border-color: var(--green-primary);
+  background: var(--cream);
+}
+
+.ai-nav.active img {
+  filter: invert(34%) sepia(25%) saturate(1420%) hue-rotate(103deg) brightness(91%) contrast(91%);
+}
+
+.ai-nav span {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-size: 10px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .kitchen-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kitchen-card {
+    padding: 12px;
+  }
+
+  .macro-grid {
+    gap: 5px;
+  }
+
+  .macro {
+    padding: 8px 6px;
+    gap: 5px;
+  }
+
+  .macro b {
+    width: 20px;
+    flex-basis: 20px;
+  }
+
+  .macro b img {
+    width: 18px;
+    height: 18px;
+  }
+}

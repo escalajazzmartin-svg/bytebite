@@ -1,0 +1,153 @@
+
+/* ========================================
+   BYTEBITE — HEADER
+======================================== */
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    min-height: calc(48px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 18px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--charcoal);
+    border-bottom: var(--dark-border);
+}
+
+.brand {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--cream);
+    border: none;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.brand > img {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    display: block;
+    object-fit: contain;
+
+    padding: 5px;
+    border-radius: 50%;
+    background: var(--cream);
+}
+
+.brand > div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand h1 {
+    margin: 0;
+    color: var(--cream);
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 750;
+}
+
+.brand h1 span {
+    color: var(--green-secondary);
+}
+
+.brand p {
+    margin: 4px 0 0;
+    color: var(--white-muted);
+
+    font-size: 10px;
+    line-height: 1.2;
+    font-style: italic;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--cream);
+    font-size: 18px;
+}
+
+.app-header .brand:focus,
+.app-header .brand:active,
+.app-header .brand:hover {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.app-header .brand img {
+    border: none;
+    outline: none;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid #e2e8e3;
+    border-radius: 10px;
+    background: #fff;
+    color: #15734b;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.logout-button:hover {
+    background: #15734b;
+    color: #fff;
+}
+
+.logout-button i {
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .logout-button {
+        padding: 10px 12px;
+    }
+
+    .logout-button span {
+        display: none;
+    }
+}

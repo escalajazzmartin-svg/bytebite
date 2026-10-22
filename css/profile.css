@@ -1,0 +1,256 @@
+/* ========================================
+   BYTEBITE — PROFILE PAGE
+   Uses global variables from style.css
+======================================== */
+
+/* Page Layout */
+.profile-page {
+    display: block;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.profile-page,
+.profile-page .page-container {
+    width: min(100%, 700px);
+    margin: 0 auto;
+    padding: 16px 18px 120px;
+    box-sizing: border-box;
+}
+
+.profile-page * {
+    box-sizing: border-box;
+}
+
+/* Heading */
+.profile-heading {
+    margin-bottom: 18px;
+}
+
+.profile-heading h1 {
+    margin: 0;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: var(--text-1);
+    line-height: 1.2;
+    font-weight: 750;
+}
+
+.profile-heading p {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: var(--text-3);
+    line-height: 1.5;
+}
+
+/* Profile Form */
+.profile-form {
+    width: 100%;
+    min-width: 0;
+}
+
+.profile-field {
+    margin-bottom: 12px;
+}
+
+.profile-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.profile-field input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    padding: 10px 12px;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    background: var(--input-background);
+    color: var(--charcoal);
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.profile-field input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+.profile-field input:focus {
+    border-color: var(--green-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb,
+            var(--green-primary) 10%,
+            transparent);
+}
+
+.profile-field input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.profile-field input[type="number"]::-webkit-inner-spin-button,
+.profile-field input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.field-help {
+    display: none;
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+/* Safety Notice */
+.profile-notice {
+    margin: 15px 0;
+    padding: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border: var(--border);
+    border-radius: var(--radius-md);
+    background: var(--green-soft);
+    color: var(--text-muted);
+}
+
+.profile-notice>i {
+    display: none;
+    flex: 0 0 auto;
+    margin-top: 2px;
+    color: var(--green-primary);
+    font-size: 14px;
+}
+
+.profile-notice p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* Buttons */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.profile-save-button,
+.profile-reset-button {
+    min-height: 40px;
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.profile-save-button {
+    display: none;
+    border-color: var(--green-primary);
+    background: var(--green-primary);
+    color: var(--cream);
+}
+
+.profile-reset-button {
+    border-color: var(--charcoal);
+    background: var(--charcoal);
+    color: var(--cream);
+}
+
+.profile-save-button:hover {
+    border-color: var(--charcoal);
+    background: var(--charcoal);
+}
+
+.profile-reset-button:hover {
+    opacity: 0.88;
+}
+
+.profile-save-button:focus-visible,
+.profile-reset-button:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
+}
+
+/* Status Message */
+.profile-message {
+    margin: 10px 0 0;
+    color: var(--green-primary);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.profile-message:empty {
+    display: none;
+}
+
+/* Responsive: Tablets and Phones */
+@media (max-width: 600px) {
+
+    .profile-page,
+    .profile-page .page-container {
+        padding: 14px 16px 120px;
+    }
+
+    .profile-heading {
+        margin-bottom: 16px;
+    }
+
+    .profile-field {
+        margin-bottom: 11px;
+    }
+
+    .profile-field input {
+        height: 44px;
+    }
+
+    .profile-notice {
+        margin-top: 14px;
+        padding: 13px;
+    }
+}
+
+/* Responsive: Small Phones */
+@media (max-width: 380px) {
+
+    .profile-page,
+    .profile-page .page-container {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+
+    .profile-heading h1 {
+        font-size: 25px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .profile-field input,
+    .profile-save-button,
+    .profile-reset-button {
+        transition: none;
+    }
+}

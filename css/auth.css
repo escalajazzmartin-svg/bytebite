@@ -1,0 +1,470 @@
+/* ========================================
+   BYTEBITE — WHITE & GREEN THEME
+======================================== */
+
+:root {
+    /* Brand Colors */
+    --charcoal: #174B35;
+    --green-primary: #15734B;
+    --green-secondary: #65AD33;
+    --cream: #FFFFFF;
+
+    /* Green Variations */
+    --green-light: #EAF5ED;
+    --green-soft: #F4FAF5;
+    --green-border: #D5E8DA;
+
+    /* Text Colors */
+    --text-color: var(--charcoal);
+    --text-muted: #64786B;
+    --white-muted: #64786B;
+
+    /* Typography */
+    --font-heading: Helvetica, Arial, sans-serif;
+    --font-body: Inter, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --text-1: 28px;
+    --text-2: 17px;
+    --text-3: 13px;
+
+    /* Border Radius */
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+
+    /* Borders */
+    --border: 1px solid var(--green-border);
+    --dark-border: 1px solid var(--green-border);
+
+    /* Backgrounds */
+    --page-background: #FFFFFF;
+    --card-background: var(--green-soft);
+    --input-background: var(--green-soft);
+    --surface-background: #FFFFFF;
+
+    /* Shadows */
+    --card-shadow: 0 12px 35px rgb(23 75 53 / 6%);
+    --focus-shadow: 0 0 0 3px rgb(21 115 75 / 10%);
+
+    /* Feedback */
+    --error-background: #FFF0F0;
+    --error-color: #A32323;
+    --success-background: var(--green-light);
+}
+
+/* ========================================
+   GLOBAL
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--page-background);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--page-background);
+    color: var(--text-color);
+    font-family: var(--font-body);
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
+}
+
+.eyebrow {
+    display: block;
+    margin: 0 0 5px;
+
+    color: var(--green-primary);
+    font-size: 11px;
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   AUTHENTICATION CARD
+======================================== */
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 36px;
+
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-background);
+    box-shadow: var(--card-shadow);
+}
+
+.auth-card h1 {
+    margin: 0 0 8px;
+
+    color: var(--charcoal);
+    font-size: 27px;
+    text-align: center;
+}
+
+.auth-subtitle {
+    margin: 0 0 24px;
+
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ========================================
+   BYTEBITE BRAND
+======================================== */
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: var(--green-primary);
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.auth-brand>i {
+    color: var(--green-primary);
+    font-size: 30px;
+}
+
+.auth-brand>span {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.auth-brand>span>span:first-child {
+    color: var(--cream);
+    -webkit-text-stroke: 1px var(--green-primary);
+}
+
+.auth-brand>span>span:last-child {
+    color: var(--green-primary);
+    -webkit-text-stroke: 0;
+}
+
+/* ========================================
+   FORM INPUTS
+======================================== */
+
+.auth-card label {
+    display: block;
+    margin: 12px 0 0;
+    color: var(--charcoal);
+    font-size: var(--text-3);
+    font-weight: 700;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.auth-card input {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    margin: 0;
+    padding: 13px 14px;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    background: var(--input-background);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-size: 14px;
+}
+
+.auth-card input:focus {
+    border-color: var(--green-primary);
+    box-shadow: var(--focus-shadow);
+}
+
+/* ========================================
+   AUTHENTICATION BUTTON
+======================================== */
+
+.auth-button {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 24px;
+    padding: 12px 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: var(--green-primary);
+    color: var(--cream);
+
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+
+    box-shadow: 0 2px 5px rgb(23 75 53 / 12%);
+    transition: background 0.2s ease;
+}
+
+.auth-button:hover {
+    background: var(--charcoal);
+}
+
+.auth-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+#verificationForm .auth-button {
+    margin-top: 20px;
+    border-radius: 3px;
+}
+
+/* ========================================
+   EMAIL VERIFICATION
+======================================== */
+
+.verification-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    margin: 28px 0 24px;
+}
+
+.auth-card .verification-code input.code-digit {
+    flex: 0 1 44px;
+    width: 44px;
+    min-width: 0;
+    height: 52px;
+    padding: 0;
+
+    border: 1px solid var(--green-border);
+    border-radius: 7px;
+
+    background: var(--green-soft);
+    color: var(--charcoal);
+
+    font-family: Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+
+    box-shadow: none;
+    outline: none;
+}
+
+.auth-card .verification-code input.code-digit:focus {
+    border-color: var(--green-primary);
+    outline: 2px solid var(--green-primary);
+    outline-offset: 0;
+
+    background: #FFFFFF;
+    box-shadow: none;
+}
+
+.verification-hint {
+    margin: -10px 0 18px;
+
+    color: var(--text-muted);
+    font-size: var(--text-3);
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ========================================
+   RESEND VERIFICATION CODE
+======================================== */
+
+.resend-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    margin-top: 18px;
+
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.resend-wrapper span {
+    color: var(--text-muted);
+    -webkit-text-stroke: 0;
+}
+
+.resend-form {
+    display: inline;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.resend-button {
+    display: inline;
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--green-primary);
+
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: underline;
+
+    box-shadow: none;
+}
+
+.resend-button:hover {
+    background: transparent;
+    color: var(--green-secondary);
+    box-shadow: none;
+}
+
+/* ========================================
+   FEEDBACK MESSAGES
+======================================== */
+
+.auth-error,
+.auth-success {
+    margin: 0 0 18px;
+    padding: 12px;
+
+    border-radius: var(--radius-sm);
+    font-size: var(--text-3);
+    line-height: 1.5;
+}
+
+.auth-error {
+    background: var(--error-background);
+    color: var(--error-color);
+}
+
+.auth-success {
+    background: var(--success-background);
+    color: var(--green-primary);
+}
+
+/* ========================================
+   LOGIN / REGISTER SWITCH
+======================================== */
+
+.auth-switch {
+    margin: 22px 0 0;
+
+    color: var(--text-muted);
+    font-size: var(--text-3);
+    text-align: center;
+}
+
+.auth-switch a {
+    color: var(--green-primary);
+    font-weight: 700;
+}
+
+.auth-switch a:hover {
+    color: var(--green-secondary);
+    text-decoration: underline;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+    }
+
+    .auth-card {
+        padding: 26px 22px;
+        border-radius: var(--radius-md);
+    }
+
+    .verification-code {
+        gap: 7px;
+        margin: 24px 0;
+    }
+
+    .auth-card .verification-code input.code-digit {
+        flex: 1 1 0;
+        width: auto;
+        max-width: 44px;
+        height: 48px;
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 340px) {
+    .verification-code {
+        gap: 5px;
+    }
+
+    .auth-card .verification-code input.code-digit {
+        height: 42px;
+        font-size: 20px;
+    }
+}

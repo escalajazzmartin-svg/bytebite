@@ -1,0 +1,688 @@
+/* ========================================
+   BYTEBITE — INVENTORY PAGE
+   White & Green Theme
+======================================== */
+
+/* ---------- PAGE LAYOUT ---------- */
+
+.page {
+    display: none;
+}
+
+.page.active-page {
+    display: block;
+}
+
+.inventory-page {
+    width: 100%;
+    min-width: 0;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.inventory-page *,
+.inventory-page *::before,
+.inventory-page *::after {
+    box-sizing: border-box;
+}
+
+.inventory-page .page-container {
+    width: min(100%, 700px);
+    min-width: 0;
+    margin: 0 auto;
+    padding: 24px 20px 110px;
+}
+
+.inventory-page .section {
+    min-width: 0;
+    margin-bottom: 24px;
+}
+
+/* ---------- PAGE HEADING ---------- */
+
+.inventory-heading {
+    margin-bottom: 25px !important;
+}
+
+.inventory-heading h2 {
+    margin: 0;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: var(--text-1);
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+/* ---------- SEARCH AND FILTERS ---------- */
+
+.inventory-controls {
+    margin-bottom: 22px !important;
+}
+
+.inventory-search-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 14px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 0 15px;
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 3px 12px rgba(21, 65, 43, 0.035);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.search-box::before {
+    content: "\f002";
+    color: var(--text-muted);
+    font-family: "Font Awesome 6 Free";
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.search-box:focus-within {
+    border-color: var(--green-primary);
+    box-shadow: 0 0 0 3px rgba(21, 115, 75, 0.09);
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    padding: 0;
+    color: var(--charcoal);
+    background: transparent;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: var(--text-3);
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.85;
+}
+
+.search-box input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+/* ---------- CATEGORY FILTERS ---------- */
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    padding: 1px 1px 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter-row::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    flex: 0 0 auto;
+    min-height: 35px;
+    padding: 8px 14px;
+    color: var(--charcoal);
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.filter:hover {
+    color: var(--green-primary);
+    border-color: var(--green-primary);
+    background: #F5FAF6;
+}
+
+.filter.active {
+    color: #FFFFFF;
+    background: var(--green-primary);
+    border-color: var(--green-primary);
+}
+
+.filter:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
+}
+
+/* ---------- ADD INGREDIENT PANEL ---------- */
+
+.add-ingredient-panel {
+    overflow: hidden;
+    background: #FFFFFF;
+    color: var(--charcoal);
+    border: 1px solid rgba(21, 115, 75, 0.14);
+    border-radius: var(--radius-md);
+    box-shadow: 0 3px 12px rgba(21, 65, 43, 0.045);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.add-ingredient-panel:hover {
+    border-color: rgba(21, 115, 75, 0.28);
+}
+
+.add-ingredient-panel[open] {
+    border-color: rgba(21, 115, 75, 0.25);
+    box-shadow: 0 6px 18px rgba(21, 65, 43, 0.07);
+}
+
+.add-ingredient-panel summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    padding: 16px 18px;
+    color: var(--green-primary);
+    background: #FFFFFF;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    list-style: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-ingredient-panel summary::-webkit-details-marker {
+    display: none;
+}
+
+.add-ingredient-panel summary::after {
+    content: "\2b";
+    display: grid;
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    color: var(--green-primary);
+    background: #EAF5EE;
+    border-radius: 9px;
+    font-size: 17px;
+    font-weight: 400;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.add-ingredient-panel summary:hover {
+    background: #FAFCFA;
+}
+
+.add-ingredient-panel[open] summary {
+    border-bottom: 1px solid var(--border);
+}
+
+.add-ingredient-panel[open] summary::after {
+    content: "\2212";
+    background: #DDEFE2;
+}
+
+.add-ingredient-panel form {
+    width: 100%;
+    min-width: 0;
+    padding: 20px 18px 18px;
+}
+
+/* ---------- FORM FIELDS ---------- */
+
+.inventory-page .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.inventory-page .form-group {
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.inventory-page .form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.inventory-page .form-group input,
+.inventory-page .form-group select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 12px;
+    color: var(--charcoal);
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.inventory-page .form-group input::placeholder {
+    color: #98A59C;
+}
+
+.inventory-page .form-group input:focus,
+.inventory-page .form-group select:focus {
+    border-color: var(--green-primary);
+    box-shadow: 0 0 0 3px rgba(21, 115, 75, 0.08);
+}
+
+.inventory-page .form-group input[type="date"] {
+    color-scheme: light;
+}
+
+.inventory-page .form-group select {
+    cursor: pointer;
+}
+
+/* ---------- PRIMARY BUTTON ---------- */
+
+.inventory-page .primary-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 16px;
+    color: #FFFFFF;
+    background: var(--green-primary);
+    border: 1px solid var(--green-primary);
+    border-radius: var(--radius-sm);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.inventory-page .primary-button:hover {
+    background: #105F3D;
+    box-shadow: 0 5px 14px rgba(21, 115, 75, 0.16);
+}
+
+.inventory-page .primary-button:active {
+    transform: scale(0.99);
+}
+
+/* ---------- INGREDIENT LIST ---------- */
+
+.inventory-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    width: 100%;
+    min-width: 0;
+}
+
+/* ---------- INGREDIENT CARD ---------- */
+
+.ingredient-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    min-height: 76px;
+    padding: 14px 15px;
+    color: var(--charcoal);
+    background: #FFFFFF;
+    border: 1px solid rgba(21, 115, 75, 0.12);
+    border-radius: var(--radius-md);
+    box-shadow: 0 3px 12px rgba(21, 65, 43, 0.045);
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.ingredient-card:hover {
+    border-color: rgba(21, 115, 75, 0.28);
+    box-shadow: 0 7px 18px rgba(21, 65, 43, 0.075);
+    transform: translateY(-1px);
+}
+
+.ingredient-info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ingredient-info h4 {
+    margin: 0 0 5px;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.ingredient-info p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- INGREDIENT STATUS ---------- */
+
+.ingredient-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 25px;
+    padding: 5px 9px;
+    border: 1px solid transparent;
+    border-radius: 99px;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ingredient-status.fresh {
+    color: var(--green-primary);
+    background: #EAF5EE;
+    border-color: #D5EBDD;
+}
+
+.ingredient-status.use-soon {
+    color: #98600D;
+    background: #FFF4DF;
+    border-color: #F4E2BD;
+}
+
+.ingredient-status.unknown {
+    color: var(--text-muted);
+    background: #F2F5F2;
+    border-color: #E5EAE5;
+}
+
+/* Optional expired status for future use */
+.ingredient-status.expired {
+    color: #B83B3B;
+    background: #FCEDED;
+    border-color: #F3D5D5;
+}
+
+/* ---------- INGREDIENT OPTIONS BUTTON ---------- */
+
+.ingredient-menu {
+    display: grid;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    padding: 0;
+    color: var(--text-muted);
+    background: #F7FAF7;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.ingredient-menu:hover {
+    color: var(--green-primary);
+    background: #EAF5EE;
+    border-color: #CFE4D5;
+}
+
+.ingredient-menu:active {
+    background: #DDEFE2;
+}
+
+.ingredient-menu:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
+}
+
+/* ---------- EMPTY INVENTORY STATE ---------- */
+
+.inventory-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 30px 18px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px dashed #C8DCCB;
+    border-radius: var(--radius-md);
+}
+
+.inventory-empty h4 {
+    margin: 0;
+    color: var(--charcoal);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+
+.inventory-empty p {
+    max-width: 300px;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.inventory-empty button {
+    min-height: 40px;
+    margin-top: 5px;
+    padding: 10px 16px;
+    color: #FFFFFF;
+    background: var(--green-primary);
+    border: 0;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+.inventory-page button:focus-visible {
+    outline: 2px solid var(--green-primary);
+    outline-offset: 3px;
+}
+
+/* ---------- TABLET AND MOBILE ---------- */
+
+@media (max-width: 600px) {
+    .inventory-page .page-container {
+        padding: 20px 16px 110px;
+    }
+
+    .inventory-page .section {
+        margin-bottom: 22px;
+    }
+
+    .inventory-heading {
+        margin-bottom: 23px !important;
+    }
+
+    .inventory-heading h2 {
+        font-size: var(--text-1);
+    }
+
+    .inventory-controls {
+        margin-bottom: 20px !important;
+    }
+
+    .search-box {
+        min-height: 44px;
+        padding: 0 12px;
+    }
+
+    .search-box input {
+        height: 42px;
+    }
+
+    .filter-row {
+        gap: 7px;
+    }
+
+    .filter {
+        min-height: 34px;
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .add-ingredient-panel summary {
+        min-height: 52px;
+        padding: 14px;
+        font-size: 13px;
+    }
+
+    .add-ingredient-panel form {
+        padding: 17px 14px 14px;
+    }
+
+    .ingredient-card {
+        min-height: 70px;
+        gap: 9px;
+        padding: 12px;
+    }
+
+    .ingredient-info h4 {
+        font-size: 13px;
+    }
+
+    .ingredient-info p {
+        font-size: 10px;
+    }
+
+    .ingredient-status {
+        min-height: 23px;
+        padding: 5px 7px;
+        font-size: 9px;
+    }
+
+    .ingredient-menu {
+        flex-basis: 33px;
+        width: 33px;
+        height: 33px;
+    }
+}
+
+/* ---------- SMALL PHONES ---------- */
+
+@media (max-width: 380px) {
+    .inventory-page,
+    .inventory-page .page-container {
+        padding-right: 13px;
+        padding-left: 13px;
+    }
+
+    .inventory-page .section {
+        margin-bottom: 19px;
+    }
+
+    .inventory-heading {
+        margin-bottom: 20px !important;
+    }
+
+    .filter-row {
+        gap: 6px;
+    }
+
+    .filter {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .ingredient-card {
+        gap: 7px;
+        padding: 10px;
+    }
+
+    .ingredient-status {
+        padding: 4px 6px;
+        font-size: 8px;
+    }
+
+    .ingredient-menu {
+        flex-basis: 30px;
+        width: 30px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .inventory-page .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .add-ingredient-panel form {
+        padding: 15px 12px 12px;
+    }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .inventory-page *,
+    .inventory-page *::before,
+    .inventory-page *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+    }
+}
